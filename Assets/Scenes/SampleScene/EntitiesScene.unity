@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &8025657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &116469117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &271404769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -831,7 +831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &320115661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,7 +947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &491436414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1189,7 +1189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  side: 0
 --- !u!114 &695649422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1399,7 +1399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &819346410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1515,7 +1515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &833898640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1631,7 +1631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &834872595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2077,7 +2077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &1241322642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2413,7 +2413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &1307572118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2639,7 +2639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &1449886984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2755,7 +2755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &1517939308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2981,7 +2981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &1594251764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3427,7 +3427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &1941240802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3543,7 +3543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  side: 0
 --- !u!114 &2021969921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3879,7 +3879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d0be01863e4f57a269539a8bde0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  side: 1
 --- !u!114 &2121415274
 MonoBehaviour:
   m_ObjectHideFlags: 0

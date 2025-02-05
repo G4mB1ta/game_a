@@ -11,7 +11,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Temp/SourceGeneratedDocuments/6066748D3D3AF14896CA6E29/AspectGenerator/Unity.Entities.SourceGen.Aspect.AspectGenerator/UnitAspect__Aspect_6552233950.g.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities.graphics/Unity.Entities.Graphics/SparseUploader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities/Unity.Entities/EntityManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities/Unity.Entities/Stubs/Unity/Debug.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -87,7 +94,9 @@
       <workItem from="1738490546336" duration="6051000" />
       <workItem from="1738560088412" duration="61000" />
       <workItem from="1738573851085" duration="15480000" />
-      <workItem from="1738642843946" duration="2816000" />
+      <workItem from="1738642843946" duration="18053000" />
+      <workItem from="1738714487946" duration="4299000" />
+      <workItem from="1738724932471" duration="6852000" />
     </task>
     <servers />
   </component>

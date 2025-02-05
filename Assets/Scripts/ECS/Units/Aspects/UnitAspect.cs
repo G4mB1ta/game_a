@@ -2,26 +2,45 @@
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace ECS.Units.Aspects {
     public readonly partial struct UnitAspect : IAspect {
-        public readonly Entity Entity;
+        private readonly Entity _entity;
 
-        // UnityAssetReference
-        private readonly RefRO<LocalTransform> localTransform;
+        private readonly RefRW<Unit> _unit;
+        private readonly RefRW<LocalTransform> _transform;
+        private readonly RefRW<Movement> _movement;
+
+        private readonly RefRW<TargetComponent> _target;
+        private readonly RefRW<Health> _health;
         
-        // TeamComponent
-        private readonly RefRO<TeamComponent> teamComponent;
+        public Entity Entity => _entity;
+
+        public LocalTransform Transform {
+            get => _transform.ValueRO;
+            set => _transform.ValueRW = value;
+        }
+
+        public Entity Target {
+            get => _target.ValueRO.target;
+            set => _target.ValueRW.target = value;
+        }
+
+        public void SetTarget(Entity target) {
+            _target.ValueRW.target = target;
+        }
         
-        private readonly RefRO<HealthComponent> healthComponent;
-        
-        private readonly RefRW<TargetComponent> targetComponent;
-        private readonly RefRO<AttackComponent> attackComponent;
-        
-        public float3 Position => localTransform.ValueRO.Position;
-        public float AttackRange => attackComponent.ValueRO.attackRange;
-        public Entity Target { get => targetComponent.ValueRO.target; set => targetComponent.ValueRW.target = value; }
-        public Team Team => teamComponent.ValueRO.team;
-        
+        public Entity GetTarget() {
+            return _target.ValueRO.target;
+        }
+
+        public void Move(float3 direction, float deltaTime) {
+            _transform.ValueRW.Position += direction * _movement.ValueRO.speed * deltaTime;
+        }
+
+        public Entity GetEntity() {
+            return _entity;
+        }
     }
 }

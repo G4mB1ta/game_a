@@ -1,59 +1,59 @@
-﻿using ECS.Units.Components;
+﻿using ECS.Units.Aspects;
+using ECS.Units.Components;
+using Unity.Burst;
 using Unity.Entities;
+using Unity.Entities.Content;
 using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace ECS.Units.Systems.Temp {
-    public partial class FindTargetSystem : SystemBase {
+    [BurstCompile]
+    public partial struct FindTargetSystem : ISystem {
         
+        public void OnCreate(ref SystemState state) {
+            state.RequireForUpdate<TargetComponent>();
+        }
 
-        protected override void OnUpdate() {
-            // Find all entities with the TargetComponent
-            foreach (var (targetComponent, entity)
-                     in SystemAPI.Query<RefRW<TargetComponent>>()
-                         .WithEntityAccess())
-
-                // If entity is not targeting, find a target
-                if (targetComponent.ValueRO.target == Entity.Null) {
-                    targetComponent.ValueRW.target = SearchForNewTarget(entity);
+        public void OnUpdate(ref SystemState state) {
+            foreach (var unitAspect in SystemAPI.Query<UnitAspect>()) {
+                
+                if (unitAspect.Target == Entity.Null) {
+                    unitAspect.Target = SearchForNewTarget(ref state, unitAspect.Entity);
                 }
-
-                // If entity is targeting, check if target is still alive
                 else {
-                    // If target is dead, set target to null
-                    if (!EntityManager.Exists(targetComponent.ValueRO.target)) {
-                        targetComponent.ValueRW.target = SearchForNewTarget(entity);
+                    if (!state.EntityManager.Exists(unitAspect.Target)) {
+                        unitAspect.Target = SearchForNewTarget(ref state, unitAspect.Entity);
                     }
-                    // If target is alive
                     else {
-                        var entityPosition = EntityManager.GetComponentData<LocalTransform>(entity).Position;
+                        var entityPosition = 
+                            state.EntityManager.GetComponentData<LocalTransform>(unitAspect.Entity).Position;
                         var entityPosition2D = new float2(entityPosition.x, entityPosition.z);
 
-                        var targetPosition = EntityManager
-                            .GetComponentData<LocalTransform>(targetComponent.ValueRO.target).Position;
+                        var targetPosition = 
+                            state.EntityManager.GetComponentData<LocalTransform>(unitAspect.Target).Position;
                         var targetPosition2D = new float2(targetPosition.x, targetPosition.z);
 
-                        // If target is out of range, search for a new target 
                         if (math.distance(targetPosition2D, entityPosition2D) >
-                            EntityManager.GetComponentData<AttackComponent>(entity).attackRange ||
-                            !IsValidTarget(entity, targetComponent.ValueRO.target))
-                            targetComponent.ValueRW.target = SearchForNewTarget(entity);
+                            state.EntityManager.GetComponentData<AttackData>(unitAspect.Entity).attackRange ||
+                            !IsValidTarget(ref state, unitAspect.Entity, unitAspect.Target))
+                            unitAspect.Target = SearchForNewTarget(ref state, unitAspect.Entity);
                     }
                 }
+            }
+        }
+        
+
+        private bool IsValidTarget(ref SystemState state, Entity entity, Entity target) {
+            if (state.EntityManager.HasComponent<SideTag>(target) == false) return false;
             
+            return state.EntityManager.HasComponent<Health>(entity) &&
+                   state.EntityManager.GetComponentData<SideTag>(entity).Side !=
+                   state.EntityManager.GetComponentData<SideTag>(target).Side;
         }
 
-        private bool IsValidTarget(Entity entity, Entity target) {
-            if (EntityManager.HasComponent<TeamComponent>(target) == false) return false;
-            
-            return EntityManager.HasComponent<HealthComponent>(entity) &&
-                   EntityManager.GetComponentData<TeamComponent>(entity).team !=
-                   EntityManager.GetComponentData<TeamComponent>(target).team;
-        }
-
-        private Entity SearchForNewTarget(Entity entity) {
+        private Entity SearchForNewTarget(ref SystemState state, Entity entity) {
             Entity target = Entity.Null;
-            var entityPosition = EntityManager.GetComponentData<LocalTransform>(entity).Position;
+            var entityPosition = state.EntityManager.GetComponentData<LocalTransform>(entity).Position;
             var entityPosition2D = new float2(entityPosition.x, entityPosition.z);
             var closestDistance = float.MaxValue;
             
@@ -61,17 +61,15 @@ namespace ECS.Units.Systems.Temp {
             foreach (var (targetTransform, targetEntity)
                      in SystemAPI.Query<RefRO<LocalTransform>>().WithEntityAccess()) {
                 
-                
                 var targetPosition = targetTransform.ValueRO.Position;
                 var targetPosition2D = new float2(targetPosition.x, targetPosition.z);
                 var distance = math.distance(targetPosition2D, entityPosition2D);
 
-                if (distance < closestDistance && IsValidTarget(entity, targetEntity)) {
+                if (distance < closestDistance && IsValidTarget(ref state, entity, targetEntity)) {
                     closestDistance = distance;
                     target = targetEntity;
                 }
             }
-
             return target;
         }
     }

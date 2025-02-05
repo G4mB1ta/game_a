@@ -1,7 +1,6 @@
 ﻿namespace ECS.Units {
-    public enum Team {
+    public enum Side {
         Attacker,
         Defender,
-        None,
     }
 }
