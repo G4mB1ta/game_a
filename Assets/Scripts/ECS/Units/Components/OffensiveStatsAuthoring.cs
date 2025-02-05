@@ -2,14 +2,14 @@ using Unity.Entities;
 using UnityEngine;
 
 namespace ECS.Units.Components {
-    public class AttackDataAuthoring : MonoBehaviour {
+    public class OffensiveStatsAuthoring : MonoBehaviour {
         public float attackDamage;
         public float attackSpeed;
         public float attackRange;
-        public class AttackDataBaker : Baker<AttackDataAuthoring> {
-            public override void Bake(AttackDataAuthoring authoring) {
+        public class OffensiveBaker : Baker<OffensiveStatsAuthoring> {
+            public override void Bake(OffensiveStatsAuthoring authoring) {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
-                AddComponent(entity, new AttackData {
+                AddComponent(entity, new OffensiveStats {
                     attackDamage = authoring.attackDamage,
                     attackSpeed = authoring.attackSpeed,
                     attackRange = authoring.attackRange
@@ -18,7 +18,7 @@ namespace ECS.Units.Components {
         }
     }
 
-    public struct AttackData : IComponentData {
+    public struct OffensiveStats : IComponentData {
         public float attackDamage;
         public float attackSpeed;
         public float attackRange;

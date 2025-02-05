@@ -14,12 +14,18 @@ namespace ECS.Units.Aspects {
 
         private readonly RefRW<TargetComponent> _target;
         private readonly RefRW<Health> _health;
+        private readonly RefRW<OffensiveStats> _offensiveStats;
         
         public Entity Entity => _entity;
 
         public LocalTransform Transform {
             get => _transform.ValueRO;
             set => _transform.ValueRW = value;
+        }
+        
+        public OffensiveStats OffensiveStats {
+            get => _offensiveStats.ValueRO;
+            set => _offensiveStats.ValueRW = value;
         }
 
         public Entity Target {

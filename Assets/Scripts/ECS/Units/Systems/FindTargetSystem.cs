@@ -34,7 +34,7 @@ namespace ECS.Units.Systems.Temp {
                         var targetPosition2D = new float2(targetPosition.x, targetPosition.z);
 
                         if (math.distance(targetPosition2D, entityPosition2D) >
-                            state.EntityManager.GetComponentData<AttackData>(unitAspect.Entity).attackRange ||
+                            state.EntityManager.GetComponentData<OffensiveStats>(unitAspect.Entity).attackRange ||
                             !IsValidTarget(ref state, unitAspect.Entity, unitAspect.Target))
                             unitAspect.Target = SearchForNewTarget(ref state, unitAspect.Entity);
                     }
