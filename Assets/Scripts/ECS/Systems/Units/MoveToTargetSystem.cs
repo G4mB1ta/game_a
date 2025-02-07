@@ -30,7 +30,7 @@ namespace ECS.Systems.Units {
 
                     // If the target is out of attack range, move towards it
                     if (math.distance(targetTransform.Position, transform.Position)
-                        > unitAspect.OffensiveStats.attackRange)
+                        > unitAspect.OffensiveStats.range)
                         unitAspect.Move(direction, SystemAPI.Time.DeltaTime);
                 }
             }

@@ -1,15 +1,17 @@
 using System;
+using ECS.Enums;
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ECS.Components.Units {
     public class OffensiveStatsAuthoring : MonoBehaviour {
         [Header("Component Data")]
-        public Enum attackType;
-        public float attackDamage;
+        public AttackType type;
+        public float damage;
         public float attackSpeed;
-        public float attackRange;
-        public Entity projectilePrefab;
+        public float range;
+        public GameObject projectilePrefab;
 
         [Header("Debug")] 
         [SerializeField] private Color color = Color.green;
@@ -18,7 +20,7 @@ namespace ECS.Components.Units {
         private void OnDrawGizmos()
         {
             Gizmos.color = color;
-            DrawGizmoCircle(transform.position, attackRange, segments);
+            DrawGizmoCircle(transform.position, range, segments);
         }
         
         /// <summary>
@@ -45,17 +47,21 @@ namespace ECS.Components.Units {
             public override void Bake(OffensiveStatsAuthoring authoring) {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                 AddComponent(entity, new OffensiveStats {
-                    attackDamage = authoring.attackDamage,
+                    type = authoring.type,
+                    damage = authoring.damage,
                     attackSpeed = authoring.attackSpeed,
-                    attackRange = authoring.attackRange
+                    range = authoring.range,
+                    projectilePrefab = GetEntity(authoring.projectilePrefab, TransformUsageFlags.Dynamic)
                 });
             }
         }
     }
 
     public struct OffensiveStats : IComponentData {
-        public float attackDamage;
+        public AttackType type;
+        public float damage;
         public float attackSpeed;
-        public float attackRange;
+        public float range;
+        public Entity projectilePrefab;
     }
 }

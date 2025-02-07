@@ -136,6 +136,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5667878778734079731, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5667878778734079731, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
+      propertyPath: range
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5667878778734079731, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5667878778734079731, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
       propertyPath: radius
       value: 5
       objectReference: {fileID: 0}
@@ -143,6 +155,10 @@ PrefabInstance:
       propertyPath: attackSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5667878778734079731, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 6980188416612453570, guid: 8324d4e275c660045b2c7370b01e3044, type: 3}
     - target: {fileID: 6208193441103138200, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -157,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7828090323768411348, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7828090323768411348, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -205,6 +221,18 @@ PrefabInstance:
       value: Attack Unit
       objectReference: {fileID: 0}
     - target: {fileID: 5667878778734079731, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5667878778734079731, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
+      propertyPath: range
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5667878778734079731, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5667878778734079731, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
       propertyPath: radius
       value: 2
       objectReference: {fileID: 0}
@@ -212,6 +240,14 @@ PrefabInstance:
       propertyPath: attackRange
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5667878778734079731, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
+      propertyPath: attackSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5667878778734079731, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 6980188416612453570, guid: 8324d4e275c660045b2c7370b01e3044, type: 3}
     - target: {fileID: 6208193441103138200, guid: ebcf5659b92e43e4a9f5102647e509dc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

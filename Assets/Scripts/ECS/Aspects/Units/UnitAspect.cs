@@ -102,7 +102,7 @@ namespace ECS.Aspects.Units
             var unitPosition2D = new float2(unitPosition.x, unitPosition.z);
             var targetPosition2D = new float2(targetPosition.x, targetPosition.z);
             
-            return math.distance(unitPosition2D, targetPosition2D) <= offensiveStats.ValueRO.attackRange;
+            return math.distance(unitPosition2D, targetPosition2D) <= offensiveStats.ValueRO.range;
         }
     }
 }
