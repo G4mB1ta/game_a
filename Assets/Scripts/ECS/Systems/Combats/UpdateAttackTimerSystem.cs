@@ -3,7 +3,7 @@ using ECS.Components.Units;
 using Unity.Burst;
 using Unity.Entities;
 
-namespace ECS.Systems.Units {
+namespace ECS.Systems.Combats {
     public partial struct UpdateAttackTimerSystem : ISystem {
         [BurstCompile]
         public void OnCreate(ref SystemState state) {

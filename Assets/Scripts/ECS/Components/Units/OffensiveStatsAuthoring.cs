@@ -5,9 +5,11 @@ using UnityEngine;
 namespace ECS.Components.Units {
     public class OffensiveStatsAuthoring : MonoBehaviour {
         [Header("Component Data")]
+        public Enum attackType;
         public float attackDamage;
         public float attackSpeed;
         public float attackRange;
+        public Entity projectilePrefab;
 
         [Header("Debug")] 
         [SerializeField] private Color color = Color.green;
@@ -19,6 +21,12 @@ namespace ECS.Components.Units {
             DrawGizmoCircle(transform.position, attackRange, segments);
         }
         
+        /// <summary>
+        ///     Draw a circle in the scene view using gizmos.
+        /// </summary>
+        /// <param name="center">Vector3 as center of circle.</param>
+        /// <param name="radius">Distance of center to lines.</param>
+        /// <param name="segments">Numbers of lines in circle.</param>
         void DrawGizmoCircle(Vector3 center, float radius, int segments)
         {
             float angleStep = 360f / segments;

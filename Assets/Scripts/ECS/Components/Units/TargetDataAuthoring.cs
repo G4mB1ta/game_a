@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ECS.Components.Units {
     public class TargetDataAuthoring : MonoBehaviour {
+        
         public class TargetDataBaker : Baker<TargetDataAuthoring> {
             public override void Bake(TargetDataAuthoring authoring) {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
@@ -19,6 +20,10 @@ namespace ECS.Components.Units {
     public struct TargetData : IComponentData {
         public Entity target;
         public float3 position;
+        
+        public void SetTarget(Entity target) {
+            this.target = target;
+        }
     }
 
 }

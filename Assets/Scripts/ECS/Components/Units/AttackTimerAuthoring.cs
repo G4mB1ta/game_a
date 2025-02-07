@@ -15,6 +15,18 @@ namespace ECS.Components.Units {
     
     public struct AttackTimer : IComponentData {
         public float timeElapsed;
-        public float interval;
+        public float attackInterval;
+        
+        public bool CanAttack() {
+            return timeElapsed >= attackInterval;
+        }
+        
+        public void Reset() {
+            timeElapsed = 0;
+        }
+        
+        public void Update(float deltaTime) {
+            timeElapsed += deltaTime;
+        }
     }
 }

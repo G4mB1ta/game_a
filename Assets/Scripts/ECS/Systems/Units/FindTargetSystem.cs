@@ -40,10 +40,10 @@ namespace ECS.Systems.Units {
         /// <summary>
         ///     Check if the target is a valid target.
         /// </summary>
-        /// <param name="state">state of current frame</param>
-        /// <param name="unit"></param>
-        /// <param name="target"></param>
-        /// <returns></returns>
+        /// <param name="state">State of current frame.</param>
+        /// <param name="unit">The UnitAspect of unit,</param>
+        /// <param name="target">The UnitAspect of target.</param>
+        /// <returns>True if target meet requirement to be a valid target.</returns>
         private bool IsValidTarget(UnitAspect unit, UnitAspect target) {
 
             bool isSameSide = unit.SideTag.side == target.SideTag.side;
@@ -54,16 +54,22 @@ namespace ECS.Systems.Units {
         /// <summary>
         ///     Check if the target is a valid target.
         /// </summary>
-        /// <param name="state">state of current frame</param>
-        /// <param name="unit"></param>
-        /// <param name="target"></param>
-        /// <returns></returns>
+        /// <param name="state">State of current frame.</param>
+        /// <param name="unit">The Entity ref of unit.</param>
+        /// <param name="target">The Entity ref of target.</param>
+        /// <returns>True if target meet requirement to be a valid target.</returns>
         private bool IsValidTarget(ref SystemState state, Entity unit, Entity target) {
             bool isSameSide = state.EntityManager.GetComponentData<SideTag>(unit).side ==
                               state.EntityManager.GetComponentData<SideTag>(target).side;
             return !isSameSide;
         }
 
+        /// <summary>
+        ///     Search for new target for the unit.
+        /// </summary>
+        /// <param name="state">State of current frame.</param>
+        /// <param name="unit">The UnitAspect of unit.</param>
+        /// <returns>An Entity as new target.</returns>
         private Entity SearchForNewTarget(ref SystemState state, UnitAspect unit) {
             var target = Entity.Null;
             var entityPosition = unit.Transform.Position;

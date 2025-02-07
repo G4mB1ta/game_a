@@ -8,6 +8,10 @@ namespace ECS.Systems.Units {
     [UpdateBefore(typeof(FindTargetSystem))]
     public partial struct UpdateTargetPosition : ISystem {
         [BurstCompile]
+        public void OnCreate(ref SystemState state) {
+        }
+
+        [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             foreach (var targetData in SystemAPI.Query<RefRW<TargetData>>()) {
                 var target = targetData.ValueRO.target;

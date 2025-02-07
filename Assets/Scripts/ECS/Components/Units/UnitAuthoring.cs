@@ -10,7 +10,6 @@ namespace ECS.Components.Units {
             }
         }
     }
-    
     public struct Unit : IComponentData {
     }
 }

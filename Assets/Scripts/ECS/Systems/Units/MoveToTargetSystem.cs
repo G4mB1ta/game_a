@@ -13,6 +13,9 @@ namespace ECS.Systems.Units {
     /// </summary>
     [UpdateAfter(typeof(FindTargetSystem))]
     public partial struct MoveToTargetSystem : ISystem {
+        [BurstCompile]
+        public void OnCreate(ref SystemState state) {
+        }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
