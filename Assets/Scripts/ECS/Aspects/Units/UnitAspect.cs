@@ -6,21 +6,18 @@ using UnityEngine;
 
 namespace ECS.Aspects.Units 
 {
-    // Add the partial keyword and implement IAspect
     public readonly partial struct UnitAspect : IAspect
     {
         public readonly Entity Entity;
 
-        // Components should be marked as readonly
         private readonly RefRW<LocalTransform> transform;
         private readonly RefRW<SideTag> sideTag;
         private readonly RefRW<Movement> movement;
         private readonly RefRW<TargetData> target;
         private readonly RefRW<Health> health;
-        private readonly RefRW<OffensiveStats> offensiveStats;
+        private readonly RefRW<AttackStats> offensiveStats;
         private readonly RefRW<AttackTimer> attackTimer;
 
-        // Properties
         public LocalTransform Transform
         {
             get => transform.ValueRO;
@@ -33,7 +30,7 @@ namespace ECS.Aspects.Units
             set => sideTag.ValueRW = value;
         }
 
-        public OffensiveStats OffensiveStats
+        public AttackStats AttackStats
         {
             get => offensiveStats.ValueRO;
             set => offensiveStats.ValueRW = value;
@@ -63,12 +60,20 @@ namespace ECS.Aspects.Units
             set => target.ValueRW.position = value;
         }
 
-        // Methods
+        /// <summary>
+        ///     Move the unit in the specified direction with deltaTime.
+        /// </summary>
+        /// <param name="direction">The direction of movement.</param>
+        /// <param name="deltaTime">The deltaTime of current frame.</param>
         public void Move(float3 direction, float deltaTime)
         {
             transform.ValueRW.Position += direction * movement.ValueRO.speed * deltaTime;
         }
 
+        
+        /// <summary>
+        ///     Update attacker timer based on the attack speed.
+        /// </summary>
         public void UpdateAttackTimer()
         {
             if (offensiveStats.ValueRO.attackSpeed > 0)
@@ -77,24 +82,14 @@ namespace ECS.Aspects.Units
             }
             else
             {
-                // Consider using a different logging approach that's compatible with Burst
-                // Debug.LogWarning isn't Burst compatible
-                // You might want to handle this case differently
                 attackTimer.ValueRW.attackInterval = float.MaxValue;
             }
         }
 
-        public void Attack(EntityCommandBuffer.ParallelWriter commandBuffer, int sortKey)
-        {
-            // Implement attack logic using command buffer
-            // This is just an example implementation
-            if (target.ValueRO.target != Entity.Null)
-            {
-                // Add attack logic here using command buffer
-                // Example: Create damage event, etc.
-            }
-        }
-
+        /// <summary>
+        ///     Check if the target is within the attack range.
+        /// </summary>
+        /// <returns>true if target is in the attack range</returns>
         public bool IsTargetInRange() {
             var unitPosition = transform.ValueRO.Position;
             var targetPosition = target.ValueRO.position;

@@ -11,31 +11,6 @@ using UnityEngine;
 
 namespace ECS.Systems.Combats {
     public partial class AttackSystem : SystemBase {
-        
-        public void OnCreate(ref SystemState state) {
-            state.RequireForUpdate<OffensiveStats>();
-        }
-
-        public void OnUpdate(ref SystemState state) {
-
-            foreach (var (unit, attackTimer) in SystemAPI.Query<UnitAspect, RefRW<AttackTimer>>())
-                if (attackTimer.ValueRW.CanAttack()) {
-                    if (IsAbleToAttack(unit)) {
-                        switch (unit.OffensiveStats.type) {
-                            case AttackType.Melee:
-                                PerformMeleeAttack();
-                                break;
-                            case AttackType.Ranged:
-                                PerformRangedAttack();
-                                break;
-                        }
-                        attackTimer.ValueRW.Reset();
-                    }
-                }
-                else {
-                    attackTimer.ValueRW.Update(SystemAPI.Time.DeltaTime);
-                }
-        }
 
         /// <summary>
         ///     Returns true if the unit is able to attack.
@@ -53,47 +28,24 @@ namespace ECS.Systems.Combats {
 
             return true;
         }
-
-        private void PerformMeleeAttack() {
-            Debug.Log("<color=green>Performing melee attack</color>");
-        }
-
-        private void PerformRangedAttack() {
-            Debug.Log("<color=yellow>Performing ranged attack</color>");
-            
-        }
-
+        
         protected override void OnCreate() {
-            RequireForUpdate<OffensiveStats>();
+            RequireForUpdate<AttackStats>();
         }
 
         protected override void OnUpdate() {
+            AttackJob();
+        }
+
+        private void AttackJob() {
             foreach (var (unit, attackTimer) in SystemAPI.Query<UnitAspect, RefRW<AttackTimer>>()) {
                 if (attackTimer.ValueRW.CanAttack()) {
                     if (IsAbleToAttack(unit)) {
-                        switch (unit.OffensiveStats.type) {
+                        switch (unit.AttackStats.type) {
                             case AttackType.Melee:
-                                PerformMeleeAttack();
                                 break;
                             case AttackType.Ranged:
-                                PerformRangedAttack();
-                                
-                                Entity bullet = EntityManager.Instantiate(unit.OffensiveStats.projectilePrefab);
-                                EntityManager.SetComponentData(bullet, new LocalTransform {
-                                    Position = unit.Transform.Position,
-                                    Rotation = unit.Transform.Rotation,
-                                    Scale = 1f
-                                });
-                                
-                                if (!EntityManager.HasComponent<Projectile>(bullet)) return;
-                                
-                                EntityManager.SetComponentData(bullet, new Projectile {
-                                    damage = unit.OffensiveStats.damage,
-                                    speed = 10f,
-                                    direction = math.normalize(unit.TargetPosition - unit.Transform.Position),
-                                    owner = unit.Entity,
-                                });
-                                
+                                PerformRangedAttack(unit);
                                 break;
                         }
                         attackTimer.ValueRW.Reset();
@@ -103,6 +55,41 @@ namespace ECS.Systems.Combats {
                     attackTimer.ValueRW.Update(SystemAPI.Time.DeltaTime);
                 }            
             }
+        }
+
+        /// <summary>
+        ///     Perform a ranged attack. The unit will instantiate a projectile and shoot it towards the target.
+        ///     Set the projectile's damage, speed, direction, owner, and target.
+        /// </summary>
+        /// <param name="unit">The unit performs the ranged attack.</param>
+        private void PerformRangedAttack(UnitAspect unit) {
+            
+            if (unit.AttackStats.projectilePrefab == Entity.Null) return;
+            
+            float3 direction = math.normalize(unit.TargetPosition - unit.Transform.Position);
+                                
+            Entity bullet = EntityManager.Instantiate(unit.AttackStats.projectilePrefab);
+            EntityManager.SetComponentData(bullet, new LocalTransform {
+                Position = unit.Transform.Position,
+                Rotation = quaternion.LookRotationSafe(direction, math.up()),
+                Scale = 1f
+            });
+
+            if (EntityManager.HasComponent<Projectile>(bullet)) {
+                Debug.Log("Projectile component exists");
+                return;
+            }
+            
+
+            EntityManager.SetComponentData(bullet, new Projectile {
+                damage = unit.AttackStats.damage,
+                speed = 25f,
+                direction = math.normalize(unit.TargetPosition - unit.Transform.Position),
+                lifeTime = 100f,
+                timer = 0f,
+                owner = unit.Entity,
+                target = unit.TargetEntity
+            });
         }
     }
 }

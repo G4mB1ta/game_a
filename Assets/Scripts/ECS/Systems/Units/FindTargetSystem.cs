@@ -29,7 +29,7 @@ namespace ECS.Systems.Units {
                         var targetPosition = unit.TargetPosition;
                         var targetPosition2D = new float2(targetPosition.x, targetPosition.z);
 
-                        if (math.distance(targetPosition2D, entityPosition2D) > unit.OffensiveStats.range ||
+                        if (math.distance(targetPosition2D, entityPosition2D) > unit.AttackStats.range ||
                             !IsValidTarget(ref state, unit.Entity, unit.TargetEntity))
                             unit.TargetEntity = SearchForNewTarget(ref state, unit);
                     }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace ECS.Components.Units {
-    public class OffensiveStatsAuthoring : MonoBehaviour {
+    public class AttackStatsAuthoring : MonoBehaviour {
         [Header("Component Data")]
         public AttackType type;
         public float damage;
@@ -43,10 +43,10 @@ namespace ECS.Components.Units {
             }
         }
 
-        public class OffensiveBaker : Baker<OffensiveStatsAuthoring> {
-            public override void Bake(OffensiveStatsAuthoring authoring) {
+        public class AttackBaker : Baker<AttackStatsAuthoring> {
+            public override void Bake(AttackStatsAuthoring authoring) {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
-                AddComponent(entity, new OffensiveStats {
+                AddComponent(entity, new AttackStats {
                     type = authoring.type,
                     damage = authoring.damage,
                     attackSpeed = authoring.attackSpeed,
@@ -57,7 +57,7 @@ namespace ECS.Components.Units {
         }
     }
 
-    public struct OffensiveStats : IComponentData {
+    public struct AttackStats : IComponentData {
         public AttackType type;
         public float damage;
         public float attackSpeed;
